@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  tokamak-neutronics:
+    build: .
+    image: ghcr.io/light0vij/s-tokamak-shield-openmc:latest
+    container_name: s-tokamak-shield-openmc
+    ports:
+      - "8888:8888"
+    volumes:
+      # Nuclear data persists on the host and is only downloaded once by
+      # executedownload.sh.
+      - ./nuclear_data:/nuclear_data
+      # Notebooks + any generated XML / CSV / XLSX outputs will be added here.
+      - ./notebooks:/home/neutronics/notebooks
+      - ./materials.py:/home/neutronics/materials.py
+    stdin_open: true
+    tty: true

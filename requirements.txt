@@ -1,0 +1,60 @@
+# =============================================================================
+# requirements.txt
+#
+# Python dependencies for the Spherical Tokamak shielding neutronics study
+# (vvij_ptnr_2023.ipynb), reproducing the fusion-energy/neutronics-workshop
+# package set.
+#
+# IMPORTANT — OpenMC / MOAB source:
+# The plain PyPI `openmc` wheel does NOT ship with DAGMC support compiled in. Instead, this project uses Jonathan Shimwell's (fusion-energy) community wheel index, 
+# which hosts prebuilt OpenMC wheels WITH DAGMC/MOAB/Embree/Double-Down support already built in, plus a matching pymoab wheel. 
+# This is the same trick the neutronics-workshop ecosystem itself uses to avoid compiling DAGMC/MOAB from source on every build:
+#
+#   pip install --extra-index-url https://shimwell.github.io/wheels openmc
+#
+#
+# requirements.txt` generates the full workshop environment.
+# =============================================================================
+
+--extra-index-url https://shimwell.github.io/wheels
+
+# --- Core neutronics / CAD stack (DAGMC-enabled wheels) --------------------
+openmc                           # DAGMC-enabled build, from shimwell's wheel index (see above)
+moab                             # pymoab bindings, from the same index — needed by stl_to_h5m/pydagmc
+cadquery                         # paramak's CAD backend (has official PyPI wheels since 2.4)
+paramak                          # parametric fusion reactor CAD -> STL/SVG/h5m geometry
+stl_to_h5m                       # STL -> DAGMC h5m mesh conversion (uses pymoab above)
+pydagmc                          # Python interface to DAGMC geometry
+openmc_data_downloader           # on-the-fly nuclear data fetching helper
+openmc_tally_unit_converter       # tally unit conversion (eV -> MeV -> W/g etc.)
+openmc_plasma_source              # optional: realistic plasma neutron sources
+openmc_source_plotter             # plots source particle locations/directions/energies
+openmc_depletion_plotter           # plots isotopes present during depletion steps
+openmc_regular_mesh_plotter        # publication-quality regular mesh tally plots
+neutronics_material_maker[density] # material recipes / density lookups, exports to OpenMC etc.
+
+# --- gmsh (mesh generation used directly in the notebook) -------------------
+gmsh
+
+# --- Scientific / numerical stack -------------------------------------------
+numpy
+scipy
+sympy
+mpmath
+pandas
+
+# --- Plotting / imaging -------------------------------------------------
+matplotlib
+Pillow
+
+# --- Jupyter ---------------------------------------------------------------
+jupyterlab
+ipython
+ipywidgets
+
+# --- Spreadsheet / reporting export (from the notebook's inline installs) --
+xlsxwriter
+openpyxl
+
+# --- Misc utilities ----------------------------------------------------
+tqdm
