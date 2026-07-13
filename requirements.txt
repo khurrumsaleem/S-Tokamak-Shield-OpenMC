@@ -3,37 +3,40 @@
 #
 # Python dependencies for the Spherical Tokamak shielding neutronics study
 # (vvij_ptnr_2023.ipynb), reproducing the fusion-energy/neutronics-workshop
-# package set.
+# package set, updated to match the notebook's current paramak (>=0.9.8) API.
 #
 # IMPORTANT — OpenMC / MOAB source:
-# The plain PyPI `openmc` wheel does NOT ship with DAGMC support compiled in. Instead, this project uses Jonathan Shimwell's (fusion-energy) community wheel index, 
-# which hosts prebuilt OpenMC wheels WITH DAGMC/MOAB/Embree/Double-Down support already built in, plus a matching pymoab wheel. 
-# This is the same trick the neutronics-workshop ecosystem itself uses to avoid compiling DAGMC/MOAB from source on every build:
+# The plain PyPI `openmc` wheel does NOT ship with DAGMC support compiled in.
+# Instead, this project uses Jonathan Shimwell's (fusion-energy) community
+# wheel index, which hosts prebuilt OpenMC wheels WITH DAGMC/MOAB/Embree/
+# Double-Down support already built in, plus a matching pymoab wheel. This is
+# the same trick the neutronics-workshop ecosystem itself uses to avoid
+# compiling DAGMC/MOAB from source on every build:
 #
 #   pip install --extra-index-url https://shimwell.github.io/wheels openmc
 #
-#
-# requirements.txt` generates the full workshop environment.
 # =============================================================================
 
 --extra-index-url https://shimwell.github.io/wheels
 
 # --- Core neutronics / CAD stack (DAGMC-enabled wheels) --------------------
-openmc                           # DAGMC-enabled build, from shimwell's wheel index (see above)
-moab                             # pymoab bindings, from the same index — needed by stl_to_h5m/pydagmc
-cadquery                         # paramak's CAD backend (has official PyPI wheels since 2.4)
-paramak==0.8.4                   # parametric fusion reactor CAD -> STL/SVG/h5m geometry
-stl_to_h5m                       # STL -> DAGMC h5m mesh conversion (uses pymoab above)
-pydagmc                          # Python interface to DAGMC geometry
-openmc_data_downloader           # on-the-fly nuclear data fetching helper
-openmc_tally_unit_converter       # tally unit conversion (eV -> MeV -> W/g etc.)
-openmc_plasma_source              # optional: realistic plasma neutron sources
-openmc_source_plotter             # plots source particle locations/directions/energies
-openmc_depletion_plotter           # plots isotopes present during depletion steps
-openmc_regular_mesh_plotter        # publication-quality regular mesh tally plots
-neutronics_material_maker[density] # material recipes / density lookups, exports to OpenMC etc.
+openmc                              # DAGMC-enabled build, from shimwell's wheel index (see above)
+moab                                 # pymoab bindings, from the same index — needed by cad_to_dagmc
+cadquery                             # paramak's CAD backend (official PyPI wheels since 2.4)
+paramak>=0.9.8                       # current function-based API (spherical_tokamak, revolved_shape,
+                                      # center_column_shield_cylinder, blanket_from_plasma, plasma_simplified, ...)
+                                      # NOTE: do NOT pin this to 0.8.x — that's the old class-based API
+                                      # (RotateStraightShape / Reactor / .show()) this notebook no longer uses.
+cad_to_dagmc                         # CadQuery Assembly/Workplane -> DAGMC h5m (replaces stl_to_h5m + pydagmc)
+openmc_data_downloader                # on-the-fly nuclear data fetching helper
+openmc_tally_unit_converter           # tally unit conversion (eV -> MeV -> W/g etc.)
+openmc_plasma_source                  # optional: realistic plasma neutron sources
+openmc_source_plotter                 # plots source particle locations/directions/energies
+openmc_depletion_plotter               # plots isotopes present during depletion steps
+openmc_regular_mesh_plotter             # publication-quality regular mesh tally plots
+neutronics_material_maker[density]      # material recipes / density lookups, exports to OpenMC etc.
 
-# --- gmsh (mesh generation used directly in the notebook) -------------------
+# --- gmsh (used internally by cad_to_dagmc's meshing backend, and directly in the notebook) --
 gmsh
 
 # --- Scientific / numerical stack -------------------------------------------
@@ -48,11 +51,13 @@ matplotlib
 Pillow
 
 # --- Jupyter ---------------------------------------------------------------
-jupyterlab<4.0.0
-ipython<8.0.0
-ipywidgets<8.0.0
-jupyter-client<7.0.0
-ipykernel<6.17.0
+# No version caps needed anymore -- those were only there to keep the OLD
+# (0.8.x) paramak/cadquery stack from clashing with modern ipykernel/jupyterlab.
+# The current paramak/cadquery releases are compatible with current Jupyter.
+jupyterlab
+ipython
+ipywidgets
+ipykernel
 
 # --- Spreadsheet / reporting export (from the notebook's inline installs) --
 xlsxwriter
@@ -61,12 +66,10 @@ openpyxl
 # --- Misc utilities ----------------------------------------------------
 tqdm
 
-# --- Visualization / Trame constraints ---
-# The pinned 2023-era CAD stack (paramak/cadquery) clashes with modern pyvista/trame 
-# releases (v3.0+). These upper bounds constrain the search space so pip's dependency 
-# resolver doesn't hang indefinitely trying to find compatible versions.
-pyvista<0.40.0
-trame<3.0.0
-trame-server<3.0.0
-trame-client<3.0.0
-typing_extensions<4.6.0
+# NOTE: pyvista / trame / trame-server / trame-client / typing_extensions caps
+# have been removed. They were only needed to stop the old (2023-era)
+# CadQuery/paramak stack from conflicting with modern pyvista/trame releases.
+# The notebook doesn't use pyvista/trame at all (geometry is visualised via
+# cq.exporters.export(...) to SVG), and the current paramak/cadquery no
+# longer pull in a clashing pyvista/trame version, so these constraints were
+# just unused drag on pip's dependency resolver.
