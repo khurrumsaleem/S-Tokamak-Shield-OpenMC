@@ -93,8 +93,8 @@ WORKDIR /home/neutronics
 #   everything else resolves from normal PyPI.
 # ********************************************************************-
 COPY requirements.txt /home/neutronics/requirements.txt
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r /home/neutronics/requirements.txt
+#RUN pip install --upgrade pip && \  ––––––––––––––––––> upgrade not allowed while building - so deleting it
+RUN pip install --no-cache-dir -r /home/neutronics/requirements.txt
 
 
 # Project files
