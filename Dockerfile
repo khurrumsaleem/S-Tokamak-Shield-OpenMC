@@ -34,7 +34,7 @@
 #       tokamak-neutronics
 # =================================================================================
 
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
 LABEL maintainer="light0vij" \
       description="NEUTRONICS ANALYSIS TO OPTIMISE NEUTRON SHIELDING MATERIALS IN SPHERICAL TOKAMAK USING OPENMC (+ DAGMC + Paramak), based on fusion-energy/neutronics-workshop, using shimwell's DAGMC-enabled OpenMC/MOAB wheels"
