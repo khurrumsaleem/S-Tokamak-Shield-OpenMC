@@ -69,3 +69,4 @@ pyvista<0.40.0
 trame<3.0.0
 trame-server<3.0.0
 trame-client<3.0.0
+typing_extensions<4.6.0
