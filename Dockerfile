@@ -58,9 +58,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # ------------------------------------------------------------------------------------------
 RUN apt-get update -y && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
-        python3.12 \
+        python3 \
         python3-pip \
-        python3.12-venv \
+        python3-venv \
         wget \
         curl \
         git \
@@ -81,8 +81,7 @@ RUN apt-get update -y && apt-get upgrade -y && \
         libhdf5-dev \
         imagemagick && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    ln -sf /usr/bin/python3.12 /usr/local/bin/python && \
-    ln -sf /usr/bin/python3.12 /usr/local/bin/python3
+    ln -sf /usr/bin/python3 /usr/local/bin/python
 
 WORKDIR /home/neutronics
 
