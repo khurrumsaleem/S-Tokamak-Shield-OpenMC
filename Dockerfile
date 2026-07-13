@@ -87,9 +87,8 @@ RUN apt-get update -y && apt-get upgrade -y && \
 #   everything else resolves from normal PyPI.
 # ---------------------------------------------------------------------------
 COPY requirements.txt /tmp/requirements.txt
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r /tmp/requirements.txt && \
-    rm /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
+        rm /tmp/requirements.txt
 
 # ---------------------------------------------------------------------------
 # Project files
