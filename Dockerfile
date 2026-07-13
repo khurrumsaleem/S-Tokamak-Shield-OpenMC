@@ -94,7 +94,7 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
 # Project files
 # ---------------------------------------------------------------------------
 WORKDIR /home/neutronics
-COPY materials.py /home/neutronics/materials.py
+#COPY materials.py /home/neutronics/materials.py
 COPY notebooks/ /home/neutronics/notebooks/
 
 # Nuclear data lives outside the image (downloaded on first run into this
