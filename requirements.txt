@@ -60,3 +60,12 @@ openpyxl
 
 # --- Misc utilities ----------------------------------------------------
 tqdm
+
+# --- Visualization / Trame constraints ---
+# The pinned 2023-era CAD stack (paramak/cadquery) clashes with modern pyvista/trame 
+# releases (v3.0+). These upper bounds constrain the search space so pip's dependency 
+# resolver doesn't hang indefinitely trying to find compatible versions.
+pyvista<0.40.0
+trame<3.0.0
+trame-server<3.0.0
+trame-client<3.0.0
