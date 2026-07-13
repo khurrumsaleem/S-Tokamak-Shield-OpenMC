@@ -13,7 +13,7 @@ services:
       - ./nuclear_data:/nuclear_data
       # Notebooks + any generated XML / CSV / XLSX outputs will be added here.
       - ./notebooks:/home/neutronics/notebooks
-      - ./materials.py:/home/neutronics/materials.py
+     # - ./materials.py:/home/neutronics/materials.py
       # Hide the files baked into the image from the Jupyter UI
       - /dev/null:/home/neutronics/requirements.txt
       - /dev/null:/home/neutronics/execution.sh
