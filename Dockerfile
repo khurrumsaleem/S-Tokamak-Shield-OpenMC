@@ -92,7 +92,7 @@ WORKDIR /home/neutronics
 #   (declared via --extra-index-url inside requirements.txt itself);
 #   everything else resolves from normal PyPI.
 # ********************************************************************-
-#COPY requirements.txt /home/neutronics/requirements.txt
+COPY requirements.txt /home/neutronics/requirements.txt
 #RUN pip install --upgrade pip && \  ––––––––––––––––––> upgrade not allowed while building - so deleting it
 RUN pip install --no-cache-dir -r /home/neutronics/requirements.txt
 
@@ -100,7 +100,7 @@ RUN pip install --no-cache-dir -r /home/neutronics/requirements.txt
 # Project files
 COPY materials.py /home/neutronics/materials.py
 COPY notebooks/ /home/neutronics/notebooks/
-#COPY executedownload.sh /home/neutronics/executedownload.sh
+COPY executedownload.sh /home/neutronics/executedownload.sh
 RUN chmod +x /home/neutronics/executedownload.sh
 
 # Nuclear data lives outside the image (downloaded on first run into this
