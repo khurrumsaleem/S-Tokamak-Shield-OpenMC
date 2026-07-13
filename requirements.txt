@@ -22,7 +22,7 @@
 openmc                           # DAGMC-enabled build, from shimwell's wheel index (see above)
 moab                             # pymoab bindings, from the same index — needed by stl_to_h5m/pydagmc
 cadquery                         # paramak's CAD backend (has official PyPI wheels since 2.4)
-paramak                          # parametric fusion reactor CAD -> STL/SVG/h5m geometry
+paramak==0.8.4                   # parametric fusion reactor CAD -> STL/SVG/h5m geometry
 stl_to_h5m                       # STL -> DAGMC h5m mesh conversion (uses pymoab above)
 pydagmc                          # Python interface to DAGMC geometry
 openmc_data_downloader           # on-the-fly nuclear data fetching helper
@@ -48,9 +48,11 @@ matplotlib
 Pillow
 
 # --- Jupyter ---------------------------------------------------------------
-jupyterlab
-ipython
-ipywidgets
+jupyterlab<4.0.0
+ipython<8.0.0
+ipywidgets<8.0.0
+jupyter-client<7.0.0
+ipykernel<6.17.0
 
 # --- Spreadsheet / reporting export (from the notebook's inline installs) --
 xlsxwriter
