@@ -1,0 +1,17 @@
+# Nuclear data — downloaded at container runtime, never committed
+nuclear_data/
+
+# Generated OpenMC material/output files
+Newmaterial_file_*.xml
+*.h5
+*.h5m
+
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

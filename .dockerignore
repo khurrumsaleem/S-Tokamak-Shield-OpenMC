@@ -1,0 +1,14 @@
+nuclear_data/
+*.h5
+*.h5m
+*.xml
+!chain-endf-b8.0.xml
+*.svg
+*.png
+*.csv
+*.xlsx
+.git
+.gitignore
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
