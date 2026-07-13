@@ -27,7 +27,6 @@ if [ ! -f "$CROSS_SECTIONS" ]; then
         -f chain-endf-b8.0.xml
 
     # ── Step 2: ENDF/B-VIII.0 cross sections ─────────────────────────────────
-    # Piped directly into tar — no intermediate file saved, saves disk space.
     echo "Step 2/4 — Downloading ENDF/B-VIII.0 cross sections (~2 GB)..."
     echo "          Terminal will look frozen during extraction — please wait."
     wget -q -O - \
@@ -56,6 +55,8 @@ fi
 # Point OpenMC to cross_sections.xml
 export OPENMC_CROSS_SECTIONS=/nuclear_data/cross_sections.xml
 
-# Start JupyterLab
+# Start JupyterLab -- ip/port/token/notebook_dir/allow_root are all set in
+# /root/.jupyter/jupyter_lab_config.py (baked in at build time), so no CLI
+# flags are needed here, same as in openmc-prism.
 echo "Starting JupyterLab at http://localhost:8888 ..."
-exec jupyter lab --allow-root --no-browser --ip=0.0.0.0 --port=8888
+exec jupyter lab
