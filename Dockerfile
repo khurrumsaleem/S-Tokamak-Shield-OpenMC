@@ -47,11 +47,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
 #   - python3 / python3-pip / python3-venv: ubuntu:24.04 ships Python 3.12
 #     natively, which is exactly what the shimwell cp312 wheels (openmc,
 #     moab) need -- no PPA or manual pip bootstrap required.
-#   - OpenGL / Mesa / X libs: needed for CadQuery / paramak / gmsh headless
-#     geometry rendering and SVG/STL export.
-#   - libhdf5: OpenMC's statepoint/summary files are HDF5.
-#   - git/wget/curl: used by the nuclear-data download step and some pip
-#     packages that fetch resources at install time.
 # ---------------------------------------------------------------------------
 RUN apt-get update -y && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
@@ -85,12 +80,12 @@ RUN apt-get update -y && apt-get upgrade -y && \
 #   openmc + moab are pulled from shimwell's DAGMC-enabled wheel index
 #   (declared via --extra-index-url inside requirements.txt itself);
 #   everything else resolves from normal PyPI.
-# ---------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
         rm /tmp/requirements.txt
 
-# ---------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Project files
 # ---------------------------------------------------------------------------
 WORKDIR /home/neutronics
@@ -117,8 +112,7 @@ RUN jupyter lab --generate-config && \
         "c.ServerApp.root_dir = '/home/neutronics/notebooks'" \
         >> /root/.jupyter/jupyter_lab_config.py
 
-# executedownload.sh lives at the container root, not under WORKDIR, so it
-# never appears in the Jupyter file browser either.
+
 COPY executedownload.sh /executedownload.sh
 RUN chmod +x /executedownload.sh
 
