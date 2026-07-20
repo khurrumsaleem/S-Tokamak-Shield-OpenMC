@@ -24,10 +24,8 @@ openmc                              # DAGMC-enabled build, from shimwell's wheel
 moab                                 # pymoab bindings, from the same index — needed by cad_to_dagmc
 cadquery                             # paramak's CAD backend (official PyPI wheels since 2.4)
 paramak>=0.9.8                       # current function-based API (spherical_tokamak, revolved_shape,
-                                      # center_column_shield_cylinder, blanket_from_plasma, plasma_simplified, ...)
-                                      # NOTE: do NOT pin this to 0.8.x — that's the old class-based API
-                                      # (RotateStraightShape / Reactor / .show()) this notebook no longer uses.
-cad_to_dagmc                         # CadQuery Assembly/Workplane -> DAGMC h5m (replaces stl_to_h5m + pydagmc)
+                                      
+cad_to_dagmc                         # CadQuery Assembly/Workplane -> DAGMC h5m 
 openmc_data_downloader                # on-the-fly nuclear data fetching helper
 openmc_tally_unit_converter           # tally unit conversion (eV -> MeV -> W/g etc.)
 openmc_plasma_source                  # optional: realistic plasma neutron sources
@@ -36,7 +34,7 @@ openmc_depletion_plotter               # plots isotopes present during depletion
 openmc_regular_mesh_plotter             # publication-quality regular mesh tally plots
 neutronics_material_maker[density]      # material recipes / density lookups, exports to OpenMC etc.
 
-# --- gmsh (used internally by cad_to_dagmc's meshing backend, and directly in the notebook) --
+# --- gmsh  --
 gmsh
 
 # --- Scientific / numerical stack -------------------------------------------
@@ -50,10 +48,7 @@ pandas
 matplotlib
 Pillow
 
-# --- Jupyter ---------------------------------------------------------------
-# No version caps needed anymore -- those were only there to keep the OLD
-# (0.8.x) paramak/cadquery stack from clashing with modern ipykernel/jupyterlab.
-# The current paramak/cadquery releases are compatible with current Jupyter.
+
 jupyterlab
 ipython
 ipywidgets
