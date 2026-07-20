@@ -66,10 +66,3 @@ openpyxl
 # --- Misc utilities ----------------------------------------------------
 tqdm
 
-# NOTE: pyvista / trame / trame-server / trame-client / typing_extensions caps
-# have been removed. They were only needed to stop the old (2023-era)
-# CadQuery/paramak stack from conflicting with modern pyvista/trame releases.
-# The notebook doesn't use pyvista/trame at all (geometry is visualised via
-# cq.exporters.export(...) to SVG), and the current paramak/cadquery no
-# longer pull in a clashing pyvista/trame version, so these constraints were
-# just unused drag on pip's dependency resolver.
