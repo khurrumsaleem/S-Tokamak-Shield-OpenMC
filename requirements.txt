@@ -27,6 +27,7 @@ paramak>=0.9.8                       # current function-based API (spherical_tok
                                       
 cad_to_dagmc                         # CadQuery Assembly/Workplane -> DAGMC h5m 
 openmc_data_downloader                # on-the-fly nuclear data fetching helper
+openmc_data
 openmc_tally_unit_converter           # tally unit conversion (eV -> MeV -> W/g etc.)
 openmc_plasma_source                  # optional: realistic plasma neutron sources
 openmc_source_plotter                 # plots source particle locations/directions/energies
