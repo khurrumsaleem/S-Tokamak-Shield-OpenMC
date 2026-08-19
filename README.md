@@ -50,7 +50,6 @@ Materials are the only thing that changes between runs — geometry (Phase A) an
 - [Paramak](https://github.com/fusion-energy/paramak) generates geometry (`spherical_tokamak`, `center_column_shield_cylinder`, `blanket_from_plasma`, `plasma_simplified`, …) from a few physical parameters instead.
 - Built on real CAD (CadQuery), feeds straight into the DAGMC meshing toolchain.
 - Makes it easy to sweep shield thickness/material with no manual redrawing.
-- Uses the current function-based API (`>=0.9.8`), not the older class-based `Reactor` API (0.8.x).
 
 ## How materials are defined
 
